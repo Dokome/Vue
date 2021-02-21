@@ -9,20 +9,26 @@
   </head>
   <body>
     <div id="app">
-      <h1 v-if="show === 'a'" data-test="v-if">there is IF in Vue</h1>
+      <!-- <h1 v-if="show === 'a'" data-test="v-if">there is IF in Vue</h1> -->
       <!-- v-if是将该元素从页面上删除，性能相对show来说可能会差一些 -->
       <!-- 需要注意的是if和else要组合使用当中间隔了一个其他标签的时候浏览器就会报错 -->
       <!-- <span>123</span> -->
-      <div v-else-if="show">I am the middle</div>
+      <!-- <div v-else-if="show">I am the middle</div>
       <h1 v-else>bye</h1>
-      <div v-show="show" data-test="v-show">{{content}}</div>
+      <div v-show="show" data-test="v-show">{{content}}</div> -->
       <!-- v-show是对样式的操作，若条件为false时会显示display='none' -->
+      <!-- 当条件show发生改变的时候input内部的值会复用之前input内的值 -->
+      <!-- <div v-if="show">用户名:<input type="text" /></div>
+      <div v-else>邮箱:<input type="text" /></div> -->
+      <!-- 解决方法 ：添加一个key属性若两个input的key不一样则不会复用之前的值-->
+      <div v-if="show">用户名:<input type="text" key="username" /></div>
+      <div v-else>邮箱:<input type="text" key="email" /></div>
     </div>
     <script>
       const vm = new Vue({
         el: '#app',
         data: {
-          show: 'a1',
+          show: true,
           content: 'I am the content...',
         },
       });

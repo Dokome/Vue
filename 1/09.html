@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Set的用法</title>
+    <script src="./vue/vue.js"></script>
+  </head>
+  <body>
+    <!-- 当页面加载完后直接为data增加属性的时候不会生效此时可以用set -->
+    <!-- 全局方法Vue.set() -->
+    <!-- 也可以使用实例方法vm.$set -->
+    <div id="app"></div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          name: 'zhangsan',
+          age: 20,
+        },
+      });
+    </script>
+  </body>
+</html>

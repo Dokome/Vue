@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue列表渲染</title>
+  </head>
+  <script src="./vue/vue.js"></script>
+  <body>
+    <div id="app">
+      <!-- 直接用数组的下标添加元素在Vue中不会渲染 -->
+      <!-- 可以采用Vue的变异方法 -->
+      <!-- push() pop() shift() unshift() splice() sort() reverse() -->
+      <div v-for="(item, index) of list" :key="item.id">
+        <div>{{item.text + '---' + index}}</div>
+      </div>
+      <!-- template占位符,本身标签不会被渲染 -->
+      <!-- <template v-for></template> -->
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          list: [
+            { id: 20192600, text: 'text1' },
+            { id: 20192602, text: 'text2' },
+            { id: 20192603, text: 'text3' },
+          ],
+        },
+      });
+    </script>
+  </body>
+</html>
+<!-- V-for循环遍历数组时推荐使用of，语法格式为(item，index)
+
+item:迭代时不同的数组元素的值
+index:当前元素的索引
+V-for循环遍历对象时推荐使用in，语法格式为(item,name,index)
+
+item:迭代时对象的键名键值
+name:迭代时对象的键名
+index:当前元素的索引 -->
