@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组件使用中的细节点</title>
+    <script src="./vue/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <!-- Vue中可以通过ref来获取DOM节点 -->
+      <div ref="hello" @click="handleClickDiv">hello world</div>
+      <!-- <table> -->
+      <!-- <tbody> -->
+      <!-- <row></row> 此处直接写row会有问题，因为h5解析tbody时遇到row会出错
+          <row></row> 此时可以为tr添加is属性使其与row有相同的内容
+          <row></row> 像select, ol, ul等标签都推荐这种做法-->
+      <!-- <tr is="row"></tr>
+          <tr is="row"></tr>
+          <tr is="row"></tr>
+        </tbody> -->
+      <!-- </table> -->
+    </div>
+    <script>
+      Vue.component('row', {
+        // 在子组件中的data需要是一个函数且返回一个对象包含所需要的数据
+        //目的是为了让每一个子组件都有自己数据的独立存储
+        data() {
+          return {
+            content: 'There is td',
+          };
+        },
+        template: '<tr><td></td>{{content}}</tr>',
+      });
+      const vm = new Vue({
+        el: '#root',
+        data: {},
+        methods: {
+          handleClickDiv() {
+            alert(this.$refs.hello.innerTEXT);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>父子组件中的数据传递</title>
+    <script src="./vue/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 通过属性进行传值 -->
+      <count :cnt="0" @increased="increase"></count>
+      <count :cnt="1" @increased="increase"></count>
+      <div>{{total}}</div>
+    </div>
+    <script>
+      const count = {
+        // 单向流父组件能向子组件传递参数，而子组件不能随意修改父组件传递的参数
+        // 父组件向子组件传递过来的参数不能随意修改，应拷贝一份以免对其他子组件在使用时造成影响
+        template: '<div @click="handleClick">{{number}}</div>',
+        props: ['cnt'],
+        data() {
+          return {
+            number: this.cnt,
+          };
+        },
+        methods: {
+          handleClick() {
+            this.number++;
+            // this.$emit('increased');
+            // 可以添加参数
+            this.$emit('increased', '传递成功');
+          },
+        },
+      };
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          total: 1,
+        },
+        components: {
+          count,
+        },
+        methods: {
+          increase(message) {
+            console.log(message);
+            this.total++;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

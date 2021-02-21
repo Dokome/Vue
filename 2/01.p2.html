@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组件使用中的细节点</title>
+    <script src="./vue/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 普通标签的ref是对dom元素的引用而子组件中的ref是对子组件本身的引用 -->
+      <count ref="one" @change="getTotal"></count>
+      <count ref="two" @change="getTotal"></count>
+      <div>{{total}}</div>
+    </div>
+    <script>
+      Vue.component('count', {
+        // 事件放在组件标签上时触发的是实例的方法，所以应该将组件的事件放在模板的定义中
+        template: '<div @click="countClick">{{number}}</div>',
+        data() {
+          return {
+            number: 0,
+          };
+        },
+        methods: {
+          countClick() {
+            this.number++;
+            this.$emit('change');
+          },
+        },
+      });
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          total: 0,
+        },
+        methods: {
+          getTotal() {
+            this.total = this.$refs.one.number + this.$refs.two.number;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
