@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生命周期</title>
+    <script src="./vue/vue.js"></script>
+  </head>
+  <body>
+    <div id="app-2">{{message}}</div>
+    <script>
+      const vm = new Vue({
+        el: '#app-2',
+        //当有template属性的时候会把template当作模板而不是直接用#app所在的div
+        // template: `<div>123</div>`,
+        template: `<div>{{message}}</div>`,
+        data: {
+          message: 'This is Vue 2',
+        },
+        //生命周期函数是Vue在某一个时间点会自动执行的函数
+        //事件和生命周期加载完后执行beforeCreate
+        beforeCreate: function () {
+          console.log(`this is beforeCreate + ${+new Date()}`);
+        },
+        //外部注入等完成之后执行created
+        created: function () {
+          console.log(`this is created + ${+new Date()}`);
+        },
+        //模板与数据相结合即将挂在到页面的一瞬间之前beforeMount
+        beforeMount: function () {
+          console.log(this.$el);
+          //  <div id="app-2">{{message}}</div>
+          console.log(`this is beforeMount + ${+new Date()}`);
+        },
+        //挂载完成之后
+        mounted: function () {
+          console.log(this.$el);
+          //<div>This is Vue 2</div>
+          console.log(`this is mounted + ${+new Date()}`);
+        },
+        //执行了vm.$destroy()但还没摧毁前
+        beforeDestroy: function () {
+          console.log(`this is beforeDestroy + ${+new Date()}`);
+        },
+        //执行之后
+        destroyed: function () {
+          console.log(`this is destroyed + ${+new Date()}`);
+        },
+        //执行数据更新但还没有更新之前的一瞬间
+        beforeUpdate: function () {
+          console.log(`this is beforeUpdate + ${+new Date()}`);
+        },
+        //更新之后
+        updated: function () {
+          console.log(`this is updated + ${+new Date()}`);
+        },
+      });
+    </script>
+  </body>
+</html>

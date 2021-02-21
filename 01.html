@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello Vue</title>
+    <script src="./vue/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <!-- <div v-on:click="handleClickDiv">{{message}}</div> -->
+      <!-- 简写方法 -->
+      <div @click="handleClickDiv">{{message}}</div>
+      <item></item>
+    </div>
+    <script>
+      //组件也是一个Vue实例
+      Vue.component('item', {
+        template: '<div>hello item</div>',
+      });
+      const vm = new Vue({
+        el: '#root',
+        data: {
+          message: 'hello Vue',
+        },
+        methods: {
+          handleClickDiv() {
+            alert('This is Vue');
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue中的样式绑定</title>
+    <script src="./vue/vue.js"></script>
+    <style>
+      .activated {
+        color: red;
+      }
+      .background {
+        background-color: #2c3e50;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <div :[attribute]="title">v-bind:[]中的中括号可以用data内的值</div> -->
+      <!-- class的对象绑定 -->
+      <!-- <div @click="handleDivClick" :class="{activated: isActivated}"> -->
+      <!-- 中括号内可填变量 ,且可以为多个值-->
+      <div @click="handleDivClick" :class="[activated, background]">
+        hello world
+      </div>
+      <!-- <span @click="handleSpanClick" :style="[styleObj, {fontSize:30px}]">我是span</span> -->
+      <span @click="handleSpanClick" :style="styleObj">我是span</span>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          // isActivated: false,
+          activated: '',
+          background: '',
+          // title: '我是data内的title',
+          // attribute: 'title',
+          styleObj: {
+            fontSize: '20px',
+            fontWeight: '900',
+          },
+        },
+        methods: {
+          handleDivClick: function () {
+            // this.isActivated = !this.isActivated;
+            // activated = 'activated';
+            this.activated = this.activated ? '' : 'activated';
+            this.background = this.background ? '' : 'background';
+          },
+          handleSpanClick: function () {
+            this.styleObj.fontSize =
+              this.styleObj.fontSize == '20px' ? '15px' : '20px';
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

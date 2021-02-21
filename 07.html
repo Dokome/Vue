@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue中的条件渲染</title>
+    <script src="./vue/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1 v-if="show === 'a'" data-test="v-if">there is IF in Vue</h1>
+      <!-- v-if是将该元素从页面上删除，性能相对show来说可能会差一些 -->
+      <!-- 需要注意的是if和else要组合使用当中间隔了一个其他标签的时候浏览器就会报错 -->
+      <!-- <span>123</span> -->
+      <div v-else-if="show">I am the middle</div>
+      <h1 v-else>bye</h1>
+      <div v-show="show" data-test="v-show">{{content}}</div>
+      <!-- v-show是对样式的操作，若条件为false时会显示display='none' -->
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          show: 'a1',
+          content: 'I am the content...',
+        },
+      });
+    </script>
+  </body>
+</html>
